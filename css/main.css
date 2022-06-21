@@ -11,21 +11,16 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-html {
-  color: #222;
-  font-size: 1em;
-  line-height: 1.4;
-}
+  html {
+    color: #222; 
+    font-size: 62.5%; 
+    line-height: 1.4;
+  } 
+  
+  body {
+    font-size: 1.6rem;
+  }
 
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Vendor-prefixed and regular ::selection selectors cannot be combined:
- * https://stackoverflow.com/a/16982510/7133471
- *
- * Customize the background color to match your design.
- */
 
 ::-moz-selection {
   background: #b3d4fc;
@@ -37,9 +32,6 @@ html {
   text-shadow: none;
 }
 
-/*
- * A better looking default horizontal rule
- */
 
 hr {
   display: block;
@@ -50,11 +42,6 @@ hr {
   padding: 0;
 }
 
-/*
- * Remove the gap between audio, canvas, iframes,
- * images, videos and the bottom of their containers:
- * https://github.com/h5bp/html5-boilerplate/issues/440
- */
 
 audio,
 canvas,
@@ -65,9 +52,6 @@ video {
   vertical-align: middle;
 }
 
-/*
- * Remove default fieldset styles.
- */
 
 fieldset {
   border: 0;
@@ -75,20 +59,77 @@ fieldset {
   padding: 0;
 }
 
-/*
- * Allow only vertical resizing of textareas.
- */
 
 textarea {
   resize: vertical;
 }
 
 /* ==========================================================================
-   Author's custom styles
+  Author's custom styles
    ========================================================================== */
 
+div.start-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15rem; 
+}
+
+div.vs-btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+div.game-container {
+  display: flex;
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  background-color: #b3d4fc;
+  width: 350px;
+  height: 650px;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+i {
+  font-size: 7.5rem;
+}
+
+i#regular-ai-icon {
+  display: none;
+}
+
+i#invincible-ai-icon {
+  display: none;
+}
+
+div.gameboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 300px;
+  height: 300px;
+  background-color: rgb(228, 73, 228);
+}
+
+div.gameboard-box {
+  background-color: rgb(198, 151, 198);
+  border: 1px solid black;
+}
+
+
+
 /* ==========================================================================
-   Helper classes
+  Helper classes
    ========================================================================== */
 
 /*

@@ -100,6 +100,18 @@ div.game-container {
   margin: auto;
 }
 
+div.player-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+#vs {
+  margin-top: 70px;
+  font-size: 4rem;
+}
+
 i {
   font-size: 7.5rem;
 }
@@ -122,8 +134,33 @@ div.gameboard {
 }
 
 div.gameboard-box {
-  background-color: rgb(198, 151, 198);
+  background-color: rgb(245, 204, 245);
   border: 1px solid black;
+} 
+
+div.gameboard-box:hover {
+  background-color: rgb(228, 188, 228);
+}
+
+#zero, #one, #two {
+  border-top: none;
+}
+
+#zero, #three, #six {
+  border-left: none;
+}
+
+#two, #five, #eight {
+  border-right: none;
+}
+
+#six, #seven, #eight {
+  border-bottom: none;
+}
+
+div.option-container {
+  display: flex;
+  gap: 20px;
 }
 
 

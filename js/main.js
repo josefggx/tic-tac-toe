@@ -5,6 +5,7 @@ const displayController = (() => {
     const backBtn = document.querySelector('#back-btn');
     // @ts-ignore
     // @ts-ignore
+    // @ts-ignore
     const restartBtn = document.querySelector('#restart-btn');
 
     vsBtn.forEach((button) => {
@@ -57,7 +58,9 @@ const displayController = (() => {
 
 const gameBoard = (() => {
     // @ts-ignore
+    // @ts-ignore
     let gameboardArray = [];
+    let winnerArray = [];
 
     const winCombinations = [
         ["zero", "one", "two"],
@@ -84,8 +87,9 @@ const gameBoard = (() => {
         winCheck() {
             winCombinations.forEach(array => {
                 let checker = array.every(e => this.marks.includes(e));
-                console.log(checker)
                 if(checker === true) {
+                    winnerArray = array;
+                    console.log(winnerArray);
                     return this.win = true;
                 }
             })
@@ -109,29 +113,40 @@ const gameBoard = (() => {
     const playerGame = () => {
         gameboardBoxes.forEach((box) => {
             box.addEventListener('click', () => {
-                if(player1.turn === true && box.textContent === "" && player1.win === false) {
+                if(player1.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
                     box.textContent = "X";
                     player1.markIdentifier(box);
                     player1.winCheck();
-                    if(player1.win === true) {
+                    if(player1.win === true && player2.win === false) {
                         // @ts-ignore
-                        document.querySelector("#winner-p").textContent = `${player1.name} wins!`
+                        document.querySelector("#winner-p").textContent = `${player1.name} wins!`;
+                        gameboardBoxes.forEach((box) => { 
+                            if(box.textContent === "X" && winnerArray.includes(box.id)) {
+                                // @ts-ignore
+                                box.style.backgroundColor = "pink";
+                            }
+                        })
                     }
                     player1.changeTurn();
                     player2.changeTurn();
                 }
-                else if(player2.turn === true && box.textContent === "" && player1.win === false) {
+                else if(player2.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
                     box.textContent = "O";
                     player2.markIdentifier(box);
                     player2.winCheck();
-                    if(player2.win === true) {
+                    if(player2.win === true && player1.win === false) {
                         // @ts-ignore
-                        document.querySelector("#winner-p").textContent = `${player2.name} wins!`
+                        document.querySelector("#winner-p").textContent = `${player2.name} wins!`;
+                        gameboardBoxes.forEach((box) => {
+                            if(box.textContent === "O" && winnerArray.includes(box.id)) {
+                                // @ts-ignore
+                                box.style.backgroundColor = "pink";
+                            }
+                        })
                     }
                     player2.changeTurn();
                     player1.changeTurn();
                 }
-
             });
         });
     }

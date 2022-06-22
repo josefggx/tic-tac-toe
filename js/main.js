@@ -4,6 +4,7 @@ const displayController = (() => {
     const gameContainer = document.querySelector('.game-container');
     const backBtn = document.querySelector('#back-btn');
     // @ts-ignore
+    // @ts-ignore
     const restartBtn = document.querySelector('#restart-btn');
 
     vsBtn.forEach((button) => {
@@ -55,6 +56,7 @@ const displayController = (() => {
 })();
 
 const gameBoard = (() => {
+    // @ts-ignore
     let gameboardArray = [];
 
     const winCombinations = [
@@ -78,37 +80,54 @@ const gameBoard = (() => {
         },
         markIdentifier(box) {
             return this.marks.push(box.id);
+        },
+        winCheck() {
+            winCombinations.forEach(array => {
+                let checker = array.every(e => this.marks.includes(e));
+                console.log(checker)
+                if(checker === true) {
+                    return this.win = true;
+                }
+            })
         }
-
     };
 
-    const playerFactory = (name, marks, icon, turn) => {
+    const playerFactory = (name, marks, icon, turn, win) => {
         let player = Object.create(playerActions);
         player.name = name;
         player.marks = marks;
         player.icon = icon;
         player.turn = turn;
+        player.win = win;
         return player;
     }
 
-    let player1 = playerFactory("Player 1", [], "fa-solid fa-user-large", true);
-    let player2 = playerFactory("Player 2", [], "fa-solid fa-user-large", false);
+    let player1 = playerFactory("Player 1", [], "fa-solid fa-user-large", true, false);
+    let player2 = playerFactory("Player 2", [], "fa-solid fa-user-large", false, false);
 
     const gameboardBoxes = document.querySelectorAll('.gameboard-box');
     const playerGame = () => {
         gameboardBoxes.forEach((box) => {
             box.addEventListener('click', () => {
-                if(player1.turn === true && box.textContent === "") {
+                if(player1.turn === true && box.textContent === "" && player1.win === false) {
                     box.textContent = "X";
                     player1.markIdentifier(box);
-                    console.log(player1.marks);
+                    player1.winCheck();
+                    if(player1.win === true) {
+                        // @ts-ignore
+                        document.querySelector("#winner-p").textContent = `${player1.name} wins!`
+                    }
                     player1.changeTurn();
                     player2.changeTurn();
                 }
-                else if(player2.turn === true && box.textContent === "") {
+                else if(player2.turn === true && box.textContent === "" && player1.win === false) {
                     box.textContent = "O";
                     player2.markIdentifier(box);
-                    console.log(player2.marks);
+                    player2.winCheck();
+                    if(player2.win === true) {
+                        // @ts-ignore
+                        document.querySelector("#winner-p").textContent = `${player2.name} wins!`
+                    }
                     player2.changeTurn();
                     player1.changeTurn();
                 }

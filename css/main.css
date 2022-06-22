@@ -138,9 +138,10 @@ div.gameboard-box {
   border: 1px solid black;
 } 
 
-div.gameboard-box:hover {
+div.gameboard-box-hover:hover {
   background-color: rgb(228, 188, 228);
 }
+
 
 #zero, #one, #two {
   border-top: none;

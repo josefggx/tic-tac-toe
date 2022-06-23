@@ -116,6 +116,26 @@ i {
   font-size: 7.5rem;
 }
 
+#player-one-icon {
+  color: yellow;
+  transition: all 0.4s ease;  
+}
+
+#player-two-icon {
+  color: black;
+  transition: all 0.4s ease;
+}
+
+#regular-ai-icon {
+  color: black;
+  transition: all 0.4s ease;
+}
+
+#invincible-ai-icon {
+  color: black;
+  transition: all 0.4s ease;
+}
+
 i#regular-ai-icon {
   display: none;
 }
@@ -134,8 +154,13 @@ div.gameboard {
 }
 
 div.gameboard-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(245, 204, 245);
   border: 1px solid black;
+  font-size: 1px; 
+  transition: all 0.4s ease; 
 } 
 
 div.gameboard-box-hover:hover {

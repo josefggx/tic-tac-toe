@@ -197,6 +197,18 @@ const gameBoard = (() => {
             })
         });
     }
+    
+    const randomNumberConverter = (x) => {
+        if(x == 0) { return "zero" }
+        if(x == 1) { return "one" }
+        if(x == 2) { return "two" }
+        if(x == 3) { return "three" }
+        if(x == 4) { return "four" }
+        if(x == 5) { return "five" }
+        if(x == 6) { return "six" }
+        if(x == 7) { return "seven" }
+        if(x == 8) { return "eight" }
+    }
 
     const regularAIGame = () => {
         // @ts-ignore
@@ -207,6 +219,13 @@ const gameBoard = (() => {
                 if(player1.turn === true && box.textContent === "" && player1.win === false && regularAI.win === false) {
                     box.textContent = "X";
                     player1.markIdentifier(box);
+                    let AIMark;
+                    do {
+                        let randomNumber = Math.floor(Math.random() * 8);
+                        AIMark = randomNumberConverter(randomNumber);
+                        alert(AIMark);
+                    // @ts-ignore
+                    } while(!document.getElementById(`${AIMark}`).textContent == "");  
                     player1.winCheck();
                     if(player1.win === true && regularAI.win === false) {
                         // @ts-ignore
@@ -223,6 +242,7 @@ const gameBoard = (() => {
                     regularAI.changeTurn();
                 }
                 else if(regularAI.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
+                    
                     box.textContent = "uwu";
                     regularAI.markIdentifier(box);
                     regularAI.winCheck();

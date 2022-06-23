@@ -1,3 +1,6 @@
+const h1 = document.querySelector("#title");
+const play = document.querySelector("#play");
+
 const gameBoard = (() => {
 
     let winnerArray = [];
@@ -21,7 +24,6 @@ const gameBoard = (() => {
                 gameContainer.style.display = 'flex';
                 if(button.id == "vs-player-btn") {
                     gameMode = "vs-player"
-                    alert(gameMode);
                     // @ts-ignore
                     document.querySelector('#player-two-name').textContent = 'Player 2';
                     // @ts-ignore
@@ -34,7 +36,6 @@ const gameBoard = (() => {
                 }
                 if(button.id == "vs-regular-AI-btn") {
                     gameMode = "vs-regular-AI"
-                    alert(gameMode);
                     // @ts-ignore
                     document.querySelector('#player-two-name').textContent = 'Regular AI';
                     // @ts-ignore
@@ -47,7 +48,6 @@ const gameBoard = (() => {
                 }
                 if(button.id == "vs-invincible-AI-btn") {
                     gameMode = "vs-invincible-AI"
-                    alert(gameMode);
                     // @ts-ignore
                     document.querySelector('#player-two-name').textContent = 'Invincible AI'
                     // @ts-ignore
@@ -61,12 +61,8 @@ const gameBoard = (() => {
             });
         });
         // @ts-ignore
-        backBtn.addEventListener('click', () => {
-            window.location.reload();
-        })
-        // @ts-ignore
         restartBtn.addEventListener("click", () => {
-            restartGame(player1, player2);
+            restartGame(player1, player2, regularAI, invincibleAI);
         })
     })();
 
@@ -84,6 +80,12 @@ const gameBoard = (() => {
             player2.marks = [];
             player2.turn = false;
             player2.win = false;
+            IA1.marks = [];
+            IA1.turn = false;
+            IA1.win = false;
+            IA2.marks = [];
+            IA2.turn = false;
+            IA2.win = false;
         });
     }
 
@@ -139,56 +141,69 @@ const gameBoard = (() => {
     const gameboardBoxes = document.querySelectorAll('.gameboard-box');
 
     const playerGame = () => {
+        // @ts-ignore
+        gameboardBoxes.forEach((box) => {
+            box.classList.add("gameboard-box-hover");
+
+            const playGame = () => {
+                if(player1.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
+                    box.textContent = "X";
+                    player1.markIdentifier(box);
+                    player1.winCheck();
+                    if(player1.win === true && player2.win === false) {
+                        // @ts-ignore
+                        document.querySelector("#winner-p").textContent = `${player1.name} wins!`;
+                        gameboardBoxes.forEach((box) => {
+                            box.classList.remove("gameboard-box-hover");
+                            if(box.textContent === "X" && winnerArray.includes(box.id)) {
+                                // @ts-ignore
+                                box.style.backgroundColor = "pink";
+                            }
+                        })
+                    }
+                    player1.changeTurn();
+                    player2.changeTurn();
+                }
+                else if(player2.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
+                    box.textContent = "O";
+                    player2.markIdentifier(box);
+                    player2.winCheck();
+                    if(player2.win === true && player1.win === false) {
+                        // @ts-ignore
+                        document.querySelector("#winner-p").textContent = `${player2.name} wins!`;
+                        gameboardBoxes.forEach((box) => {
+                            box.classList.remove("gameboard-box-hover");
+                            if(box.textContent === "O" && winnerArray.includes(box.id)) {
+                                // @ts-ignore
+                                box.style.backgroundColor = "pink";
+                            }
+                        })
+                    }
+                    player2.changeTurn();
+                    player1.changeTurn();
+                }
+            }
+            box.addEventListener('click', playGame);
             // @ts-ignore
-            gameboardBoxes.forEach((box) => {
-                box.classList.add("gameboard-box-hover");
-                box.addEventListener('click', () => {
-                    if(player1.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
-                        box.textContent = "X";
-                        player1.markIdentifier(box);
-                        player1.winCheck();
-                        if(player1.win === true && player2.win === false) {
-                            // @ts-ignore
-                            document.querySelector("#winner-p").textContent = `${player1.name} wins!`;
-                            gameboardBoxes.forEach((box) => {
-                                box.classList.remove("gameboard-box-hover");
-                                if(box.textContent === "X" && winnerArray.includes(box.id)) {
-                                    // @ts-ignore
-                                    box.style.backgroundColor = "pink";
-                                }
-                            })
-                        }
-                        player1.changeTurn();
-                        player2.changeTurn();
-                    }
-                    else if(player2.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
-                        box.textContent = "O";
-                        player2.markIdentifier(box);
-                        player2.winCheck();
-                        if(player2.win === true && player1.win === false) {
-                            // @ts-ignore
-                            document.querySelector("#winner-p").textContent = `${player2.name} wins!`;
-                            gameboardBoxes.forEach((box) => {
-                                box.classList.remove("gameboard-box-hover");
-                                if(box.textContent === "O" && winnerArray.includes(box.id)) {
-                                    // @ts-ignore
-                                    box.style.backgroundColor = "pink";
-                                }
-                            })
-                        }
-                        player2.changeTurn();
-                        player1.changeTurn();
-                    }
-                    
+            document.querySelector("#back-btn").addEventListener('click', () => {
+                // @ts-ignore
+                document.querySelector(".start-menu").style.display = 'flex';
+                // @ts-ignore
+                document.querySelector(".game-container").style.display = 'none';
+                gameboardBoxes.forEach((box) => {
+                    box.removeEventListener('click', playGame);
                 });
-            });
-    } 
-    
+                restartGame(player1, player2, regularAI, invincibleAI);
+            })
+        });
+    }
+
     const regularAIGame = () => {
         // @ts-ignore
         gameboardBoxes.forEach((box) => {
             box.classList.add("gameboard-box-hover");
-            box.addEventListener('click', () => {
+
+            const playGame = () => {
                 if(player1.turn === true && box.textContent === "" && player1.win === false && regularAI.win === false) {
                     box.textContent = "X";
                     player1.markIdentifier(box);
@@ -207,7 +222,7 @@ const gameBoard = (() => {
                     player1.changeTurn();
                     regularAI.changeTurn();
                 }
-                else if(regularAI.turn === true && box.textContent === "" && player1.win === false && regularAI.win === false) {
+                else if(regularAI.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
                     box.textContent = "uwu";
                     regularAI.markIdentifier(box);
                     regularAI.winCheck();
@@ -216,7 +231,7 @@ const gameBoard = (() => {
                         document.querySelector("#winner-p").textContent = `${regularAI.name} wins!`;
                         gameboardBoxes.forEach((box) => {
                             box.classList.remove("gameboard-box-hover");
-                            if(box.textContent === "uwu" && winnerArray.includes(box.id)) {
+                            if(box.textContent === "O" && winnerArray.includes(box.id)) {
                                 // @ts-ignore
                                 box.style.backgroundColor = "pink";
                             }
@@ -225,8 +240,19 @@ const gameBoard = (() => {
                     regularAI.changeTurn();
                     player1.changeTurn();
                 }
-
-            });
+            }
+            box.addEventListener('click', playGame);
+            // @ts-ignore
+            document.querySelector("#back-btn").addEventListener('click', () => {
+                // @ts-ignore
+                document.querySelector(".start-menu").style.display = 'flex';
+                // @ts-ignore
+                document.querySelector(".game-container").style.display = 'none';
+                gameboardBoxes.forEach((box) => {
+                    box.removeEventListener('click', playGame);
+                });
+                restartGame(player1, player2, regularAI, invincibleAI);
+            })
         });
     }
 })();

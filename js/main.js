@@ -276,7 +276,7 @@ const gameBoard = (() => {
                         turns++;
                     };
                     animation();
-                    
+
                     player1.markIdentifier(box);
                     let AIMark;
                     do {
@@ -324,21 +324,26 @@ const gameBoard = (() => {
                         setTimeout(animation, 450);
                         regularAI.marks.push(AIMark);
                         regularAI.winCheck();
-                        if(regularAI.win === true && player1.win === false) {
-                            // @ts-ignore
-                            document.querySelector("#player-one-icon").style.color = "black";
-                            // @ts-ignore
-                            document.querySelector("#regular-ai-icon").style.color = "black";
-                            // @ts-ignore
-                            document.querySelector("#winner-p").textContent = `${regularAI.name} wins!`;
-                            gameboardBoxes.forEach((box) => {
-                                box.classList.remove("gameboard-box-hover");
-                                if(box.textContent === "O" && winnerArray.includes(box.id)) {
-                                    // @ts-ignore
-                                    box.style.backgroundColor = "pink";
-                                }
-                            })
-                        }
+
+                        setTimeout(() => {
+                            if(regularAI.win === true && player1.win === false) {
+                                // @ts-ignore
+                                document.querySelector("#player-one-icon").style.color = "black";
+                                // @ts-ignore
+                                document.querySelector("#regular-ai-icon").style.color = "black";
+                                // @ts-ignore
+                                document.querySelector("#winner-p").textContent = `${regularAI.name} wins!`;
+                                gameboardBoxes.forEach((box) => {
+                                    box.classList.remove("gameboard-box-hover");
+                                    if(box.textContent === "O" && winnerArray.includes(box.id)) {
+                                        // @ts-ignore
+                                        box.style.backgroundColor = "pink";
+                                    }
+                                })
+                            }
+                        }, 500);
+
+
                         setTimeout(() => {
                             regularAI.changeTurn();
                             player1.changeTurn();

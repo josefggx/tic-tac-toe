@@ -1,24 +1,15 @@
-const h1 = document.querySelector("#title");
-const play = document.querySelector("#play");
-
 const gameBoard = (() => {
 
     let winnerArray = [];
-    // @ts-ignore
-    // @ts-ignore
     let gameMode = "";
 
-    // @ts-ignore
-    // @ts-ignore
     const displayController = (() => {
         const startMenu = document.querySelector('.start-menu');
         const vsBtn = document.querySelectorAll(".vs-btn");
         const gameContainer = document.querySelector('.game-container');
         // @ts-ignore
-        // @ts-ignore
         const backBtn = document.querySelector('#back-btn');
-        // @ts-ignore
-        // @ts-ignore
+
         // @ts-ignore
         const restartBtn = document.querySelector('#restart-btn');
 
@@ -105,7 +96,7 @@ const gameBoard = (() => {
                 // @ts-ignore
                 document.querySelector("#invincible-ai-icon").style.color = "black";
             });
-        }, 400) 
+        }, 400)
     }
 
     const winCombinations = [
@@ -284,8 +275,8 @@ const gameBoard = (() => {
                         box.style.fontSize = "70px";
                         turns++;
                     };
-
                     animation();
+                    
                     player1.markIdentifier(box);
                     let AIMark;
                     do {
@@ -328,9 +319,9 @@ const gameBoard = (() => {
                             document.getElementById(`${AIMark}`).textContent = "O";
                             // @ts-ignore
                             document.getElementById(`${AIMark}`).style.fontSize = "70px";
-                            
+
                         };
-                        setTimeout(animation, 450); 
+                        setTimeout(animation, 450);
                         regularAI.marks.push(AIMark);
                         regularAI.winCheck();
                         if(regularAI.win === true && player1.win === false) {
@@ -351,7 +342,7 @@ const gameBoard = (() => {
                         setTimeout(() => {
                             regularAI.changeTurn();
                             player1.changeTurn();
-                        }, 500); 
+                        }, 500);
                     }
                 }
 

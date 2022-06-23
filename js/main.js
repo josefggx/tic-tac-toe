@@ -70,6 +70,7 @@ const gameBoard = (() => {
         gameboardBoxes.forEach((box) => {
             box.classList.add("gameboard-box-hover");
             box.textContent = "";
+            turns = 0;
             // @ts-ignore
             document.querySelector("#winner-p").textContent = "";
             // @ts-ignore
@@ -139,6 +140,7 @@ const gameBoard = (() => {
     let invincibleAI = playerFactory("Invincible AI", [], "fa-solid fa-cat", false, false);
 
     const gameboardBoxes = document.querySelectorAll('.gameboard-box');
+    let turns = 0;
 
     const playerGame = () => {
         // @ts-ignore
@@ -146,8 +148,10 @@ const gameBoard = (() => {
             box.classList.add("gameboard-box-hover");
 
             const playGame = () => {
+
                 if(player1.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
                     box.textContent = "X";
+                    turns++;
                     player1.markIdentifier(box);
                     player1.winCheck();
                     if(player1.win === true && player2.win === false) {
@@ -159,6 +163,12 @@ const gameBoard = (() => {
                                 // @ts-ignore
                                 box.style.backgroundColor = "pink";
                             }
+                        })
+                    } else if(turns == 5) {
+                        // @ts-ignore
+                        document.querySelector("#winner-p").textContent = `Draw!`;
+                        gameboardBoxes.forEach((box) => {
+                            box.classList.remove("gameboard-box-hover");
                         })
                     }
                     player1.changeTurn();
@@ -197,7 +207,7 @@ const gameBoard = (() => {
             })
         });
     }
-    
+
     const randomNumberConverter = (x) => {
         if(x == 0) { return "zero" }
         if(x == 1) { return "one" }
@@ -214,18 +224,17 @@ const gameBoard = (() => {
         // @ts-ignore
         gameboardBoxes.forEach((box) => {
             box.classList.add("gameboard-box-hover");
-
             const playGame = () => {
                 if(player1.turn === true && box.textContent === "" && player1.win === false && regularAI.win === false) {
+                    turns++;
                     box.textContent = "X";
                     player1.markIdentifier(box);
                     let AIMark;
                     do {
-                        let randomNumber = Math.floor(Math.random() * 8);
+                        let randomNumber = Math.floor(Math.random() * 9);
                         AIMark = randomNumberConverter(randomNumber);
-                        alert(AIMark);
-                    // @ts-ignore
-                    } while(!document.getElementById(`${AIMark}`).textContent == "");  
+                        // @ts-ignore
+                    } while(turns <= 4 && !document.getElementById(`${AIMark}`).textContent == "");
                     player1.winCheck();
                     if(player1.win === true && regularAI.win === false) {
                         // @ts-ignore
@@ -237,29 +246,36 @@ const gameBoard = (() => {
                                 box.style.backgroundColor = "pink";
                             }
                         })
-                    }
-                    player1.changeTurn();
-                    regularAI.changeTurn();
-                }
-                else if(regularAI.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
-                    
-                    box.textContent = "uwu";
-                    regularAI.markIdentifier(box);
-                    regularAI.winCheck();
-                    if(regularAI.win === true && player1.win === false) {
+                    } else if(turns == 5) {
                         // @ts-ignore
-                        document.querySelector("#winner-p").textContent = `${regularAI.name} wins!`;
+                        document.querySelector("#winner-p").textContent = `Draw!`;
                         gameboardBoxes.forEach((box) => {
                             box.classList.remove("gameboard-box-hover");
-                            if(box.textContent === "O" && winnerArray.includes(box.id)) {
-                                // @ts-ignore
-                                box.style.backgroundColor = "pink";
-                            }
                         })
                     }
-                    regularAI.changeTurn();
                     player1.changeTurn();
+                    regularAI.changeTurn();
+                    if(regularAI.turn === true && player1.win === false && regularAI.win === false && turns <= 4) {
+                        // @ts-ignore
+                        document.getElementById(`${AIMark}`).textContent = "O";
+                        regularAI.marks.push(AIMark);
+                        regularAI.winCheck();
+                        if(regularAI.win === true && player1.win === false) {
+                            // @ts-ignore
+                            document.querySelector("#winner-p").textContent = `${regularAI.name} wins!`;
+                            gameboardBoxes.forEach((box) => {
+                                box.classList.remove("gameboard-box-hover");
+                                if(box.textContent === "O" && winnerArray.includes(box.id)) {
+                                    // @ts-ignore
+                                    box.style.backgroundColor = "pink";
+                                }
+                            })
+                        }
+                        regularAI.changeTurn();
+                        player1.changeTurn();
+                    }
                 }
+
             }
             box.addEventListener('click', playGame);
             // @ts-ignore

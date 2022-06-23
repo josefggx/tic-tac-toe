@@ -73,37 +73,39 @@ const gameBoard = (() => {
     })();
 
     const restartGame = (player1, player2, IA1, IA2) => {
-        gameboardBoxes.forEach((box) => {
-            box.classList.add("gameboard-box-hover");
-            box.textContent = "";
-            // @ts-ignore
-            box.style.fontSize = "1px";
-            turns = 0;
-            // @ts-ignore
-            document.querySelector("#winner-p").textContent = "";
-            // @ts-ignore
-            box.style.backgroundColor = "";
-            player1.marks = [];
-            player1.turn = true;
-            player1.win = false;
-            player2.marks = [];
-            player2.turn = false;
-            player2.win = false;
-            IA1.marks = [];
-            IA1.turn = false;
-            IA1.win = false;
-            IA2.marks = [];
-            IA2.turn = false;
-            IA2.win = false;
-            // @ts-ignore
-            document.querySelector("#player-one-icon").style.color = "yellow";
-            // @ts-ignore
-            document.querySelector("#player-two-icon").style.color = "black";
-            // @ts-ignore
-            document.querySelector("#regular-ai-icon").style.color = "black";
-            // @ts-ignore
-            document.querySelector("#invincible-ai-icon").style.color = "black";
-        });
+        setTimeout(() => {
+            gameboardBoxes.forEach((box) => {
+                box.classList.add("gameboard-box-hover");
+                // @ts-ignore
+                box.style.fontSize = "1px";
+                box.textContent = "";
+                turns = 0;
+                // @ts-ignore
+                document.querySelector("#winner-p").textContent = "";
+                // @ts-ignore
+                box.style.backgroundColor = "";
+                player1.marks = [];
+                player1.turn = true;
+                player1.win = false;
+                player2.marks = [];
+                player2.turn = false;
+                player2.win = false;
+                IA1.marks = [];
+                IA1.turn = false;
+                IA1.win = false;
+                IA2.marks = [];
+                IA2.turn = false;
+                IA2.win = false;
+                // @ts-ignore
+                document.querySelector("#player-one-icon").style.color = "yellow";
+                // @ts-ignore
+                document.querySelector("#player-two-icon").style.color = "black";
+                // @ts-ignore
+                document.querySelector("#regular-ai-icon").style.color = "black";
+                // @ts-ignore
+                document.querySelector("#invincible-ai-icon").style.color = "black";
+            });
+        }, 400) 
     }
 
     const winCombinations = [
@@ -326,8 +328,9 @@ const gameBoard = (() => {
                             document.getElementById(`${AIMark}`).textContent = "O";
                             // @ts-ignore
                             document.getElementById(`${AIMark}`).style.fontSize = "70px";
+                            
                         };
-                        animation();
+                        setTimeout(animation, 450); 
                         regularAI.marks.push(AIMark);
                         regularAI.winCheck();
                         if(regularAI.win === true && player1.win === false) {
@@ -345,8 +348,10 @@ const gameBoard = (() => {
                                 }
                             })
                         }
-                        regularAI.changeTurn();
-                        player1.changeTurn();
+                        setTimeout(() => {
+                            regularAI.changeTurn();
+                            player1.changeTurn();
+                        }, 500); 
                     }
                 }
 

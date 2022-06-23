@@ -4,12 +4,18 @@ const play = document.querySelector("#play");
 const gameBoard = (() => {
 
     let winnerArray = [];
+    // @ts-ignore
+    // @ts-ignore
     let gameMode = "";
 
+    // @ts-ignore
+    // @ts-ignore
     const displayController = (() => {
         const startMenu = document.querySelector('.start-menu');
         const vsBtn = document.querySelectorAll(".vs-btn");
         const gameContainer = document.querySelector('.game-container');
+        // @ts-ignore
+        // @ts-ignore
         const backBtn = document.querySelector('#back-btn');
         // @ts-ignore
         // @ts-ignore
@@ -70,6 +76,8 @@ const gameBoard = (() => {
         gameboardBoxes.forEach((box) => {
             box.classList.add("gameboard-box-hover");
             box.textContent = "";
+            // @ts-ignore
+            box.style.fontSize = "1px";
             turns = 0;
             // @ts-ignore
             document.querySelector("#winner-p").textContent = "";
@@ -87,6 +95,14 @@ const gameBoard = (() => {
             IA2.marks = [];
             IA2.turn = false;
             IA2.win = false;
+            // @ts-ignore
+            document.querySelector("#player-one-icon").style.color = "yellow";
+            // @ts-ignore
+            document.querySelector("#player-two-icon").style.color = "black";
+            // @ts-ignore
+            document.querySelector("#regular-ai-icon").style.color = "black";
+            // @ts-ignore
+            document.querySelector("#invincible-ai-icon").style.color = "black";
         });
     }
 
@@ -149,12 +165,27 @@ const gameBoard = (() => {
 
             const playGame = () => {
 
+
                 if(player1.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
-                    box.textContent = "X";
-                    turns++;
+                    const animation = () => {
+                        // @ts-ignore
+                        document.querySelector("#player-one-icon").style.color = "black";
+                        // @ts-ignore
+                        document.querySelector("#player-two-icon").style.color = "yellow";
+                        box.textContent = "X";
+                        // @ts-ignore
+                        box.style.fontSize = "70px";
+                        turns++;
+
+                    };
+                    animation();
                     player1.markIdentifier(box);
                     player1.winCheck();
                     if(player1.win === true && player2.win === false) {
+                        // @ts-ignore
+                        document.querySelector("#player-one-icon").style.color = "black";
+                        // @ts-ignore
+                        document.querySelector("#player-two-icon").style.color = "black";
                         // @ts-ignore
                         document.querySelector("#winner-p").textContent = `${player1.name} wins!`;
                         gameboardBoxes.forEach((box) => {
@@ -175,10 +206,23 @@ const gameBoard = (() => {
                     player2.changeTurn();
                 }
                 else if(player2.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
-                    box.textContent = "O";
+                    const animation = () => {
+                        // @ts-ignore
+                        document.querySelector("#player-one-icon").style.color = "yellow";
+                        // @ts-ignore
+                        document.querySelector("#player-two-icon").style.color = "black";
+                        box.textContent = "O";
+                        // @ts-ignore
+                        box.style.fontSize = "70px";
+                    };
+                    animation();
                     player2.markIdentifier(box);
                     player2.winCheck();
                     if(player2.win === true && player1.win === false) {
+                        // @ts-ignore
+                        document.querySelector("#player-one-icon").style.color = "black";
+                        // @ts-ignore
+                        document.querySelector("#player-two-icon").style.color = "black";
                         // @ts-ignore
                         document.querySelector("#winner-p").textContent = `${player2.name} wins!`;
                         gameboardBoxes.forEach((box) => {
@@ -224,10 +268,22 @@ const gameBoard = (() => {
         // @ts-ignore
         gameboardBoxes.forEach((box) => {
             box.classList.add("gameboard-box-hover");
+
             const playGame = () => {
                 if(player1.turn === true && box.textContent === "" && player1.win === false && regularAI.win === false) {
-                    turns++;
-                    box.textContent = "X";
+
+                    const animation = () => {
+                        // @ts-ignore
+                        document.querySelector("#player-one-icon").style.color = "black";
+                        // @ts-ignore
+                        document.querySelector("#regular-ai-icon").style.color = "yellow";
+                        box.textContent = "X";
+                        // @ts-ignore
+                        box.style.fontSize = "70px";
+                        turns++;
+                    };
+
+                    animation();
                     player1.markIdentifier(box);
                     let AIMark;
                     do {
@@ -237,6 +293,10 @@ const gameBoard = (() => {
                     } while(turns <= 4 && !document.getElementById(`${AIMark}`).textContent == "");
                     player1.winCheck();
                     if(player1.win === true && regularAI.win === false) {
+                        // @ts-ignore
+                        document.querySelector("#player-one-icon").style.color = "black";
+                        // @ts-ignore
+                        document.querySelector("#regular-ai-icon").style.color = "black";
                         // @ts-ignore
                         document.querySelector("#winner-p").textContent = `${player1.name} wins!`;
                         gameboardBoxes.forEach((box) => {
@@ -256,11 +316,25 @@ const gameBoard = (() => {
                     player1.changeTurn();
                     regularAI.changeTurn();
                     if(regularAI.turn === true && player1.win === false && regularAI.win === false && turns <= 4) {
-                        // @ts-ignore
-                        document.getElementById(`${AIMark}`).textContent = "O";
+
+                        const animation = () => {
+                            // @ts-ignore
+                            document.querySelector("#player-one-icon").style.color = "yellow";
+                            // @ts-ignore
+                            document.querySelector("#regular-ai-icon").style.color = "black";
+                            // @ts-ignore
+                            document.getElementById(`${AIMark}`).textContent = "O";
+                            // @ts-ignore
+                            document.getElementById(`${AIMark}`).style.fontSize = "70px";
+                        };
+                        animation();
                         regularAI.marks.push(AIMark);
                         regularAI.winCheck();
                         if(regularAI.win === true && player1.win === false) {
+                            // @ts-ignore
+                            document.querySelector("#player-one-icon").style.color = "black";
+                            // @ts-ignore
+                            document.querySelector("#regular-ai-icon").style.color = "black";
                             // @ts-ignore
                             document.querySelector("#winner-p").textContent = `${regularAI.name} wins!`;
                             gameboardBoxes.forEach((box) => {

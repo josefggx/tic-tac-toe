@@ -92,7 +92,7 @@ div.start-menu #play {
   font-size: 3rem; 
   font-family: 'Space Mono', monospace;
   font-weight: bold;
-  margin-top: 0;
+  margin-top: 5px;
   color: #81c5e8;
 }
 
@@ -102,7 +102,7 @@ div.vs-btn-container {
   gap: 12px;
 }
 
-.vs-btn {
+button {
   background-image: linear-gradient(to right, #244589 0%, #81c5e8  51%, #244589  100%);
   margin: 4px;
   padding: 13px 24px;
@@ -124,13 +124,11 @@ div.vs-btn-container {
   cursor: pointer;
 }
 
-.vs-btn:hover {
+button:hover {
   background-position: right center; 
   color: #fff;
   text-decoration: none;
 }
-
-
 
 div.game-container {
   display: flex;
@@ -139,7 +137,6 @@ div.game-container {
   gap: 20px;
   align-items: center;
   text-align: center;
-  background-color: #b3d4fc;
   width: 350px;
   height: 650px;
   position: absolute;
@@ -155,11 +152,19 @@ div.player-container {
   gap: 20px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
+}
+
+div.player-container p {
+  font-size: 2.5rem;
+  font-family: 'Play', sans-serif;
+  margin: 10px;
 }
 
 #vs {
   margin-top: 70px;
   font-size: 4rem;
+  font-family: 'Playball', cursive;
 }
 
 i {
@@ -167,7 +172,6 @@ i {
 }
 
 #player-one-icon {
-  color: yellow;
   transition: all 0.4s ease;  
 }
 
@@ -200,22 +204,43 @@ div.gameboard {
   grid-template-rows: 1fr 1fr 1fr;
   width: 300px;
   height: 300px;
-  background-color: rgb(228, 73, 228);
 }
 
 div.gameboard-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(245, 204, 245);
-  border: 1px solid black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  border: 3px solid rgb(198, 198, 198);
   font-size: 1px; 
   transition: all 0.4s ease; 
 } 
 
 div.gameboard-box-hover:hover {
-  background-color: rgb(228, 188, 228);
+  background-color: rgb(241, 241, 241);
+  cursor: pointer;
 }
+
+
+#back-btn {
+  background-image: linear-gradient(to right, #892424 0%, #e88181  51%, #892424  100%);
+  transition: 0.5s;
+  background-size: 200% auto;
+}
+
+#restart-btn {
+  background-image: linear-gradient(to right, #6f6f6f 0%, #afafaf  51%, #6f6f6f 100%);
+  transition: 0.5s;
+  background-size: 200% auto;
+}
+
+p#winner-p {
+  font-size: 1.8rem;
+  font-family: monospace;
+  margin-bottom: 0;
+}
+
 
 
 #zero, #one, #two {

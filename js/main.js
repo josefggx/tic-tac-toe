@@ -88,7 +88,7 @@ const gameBoard = (() => {
                 IA2.turn = false;
                 IA2.win = false;
                 // @ts-ignore
-                document.querySelector("#player-one-icon").style.color = "yellow";
+                document.querySelector("#player-one-icon").style.color = "#df5858";
                 // @ts-ignore
                 document.querySelector("#player-two-icon").style.color = "black";
                 // @ts-ignore
@@ -164,10 +164,12 @@ const gameBoard = (() => {
                         // @ts-ignore
                         document.querySelector("#player-one-icon").style.color = "black";
                         // @ts-ignore
-                        document.querySelector("#player-two-icon").style.color = "yellow";
+                        document.querySelector("#player-two-icon").style.color = "#81c5e8";
                         box.textContent = "X";
                         // @ts-ignore
-                        box.style.fontSize = "70px";
+                        box.style.color = "#df5858";
+                        // @ts-ignore
+                        box.style.fontSize = "67px";
                         turns++;
 
                     };
@@ -185,7 +187,7 @@ const gameBoard = (() => {
                             box.classList.remove("gameboard-box-hover");
                             if(box.textContent === "X" && winnerArray.includes(box.id)) {
                                 // @ts-ignore
-                                box.style.backgroundColor = "pink";
+                                box.style.backgroundColor = "#DFFFDF";
                             }
                         })
                     } else if(turns == 5) {
@@ -201,12 +203,14 @@ const gameBoard = (() => {
                 else if(player2.turn === true && box.textContent === "" && player1.win === false && player2.win === false) {
                     const animation = () => {
                         // @ts-ignore
-                        document.querySelector("#player-one-icon").style.color = "yellow";
+                        document.querySelector("#player-one-icon").style.color = "#df5858";
                         // @ts-ignore
                         document.querySelector("#player-two-icon").style.color = "black";
                         box.textContent = "O";
                         // @ts-ignore
-                        box.style.fontSize = "70px";
+                        box.style.color = "#81c5e8";
+                        // @ts-ignore
+                        box.style.fontSize = "67px";
                     };
                     animation();
                     player2.markIdentifier(box);
@@ -222,7 +226,7 @@ const gameBoard = (() => {
                             box.classList.remove("gameboard-box-hover");
                             if(box.textContent === "O" && winnerArray.includes(box.id)) {
                                 // @ts-ignore
-                                box.style.backgroundColor = "pink";
+                                box.style.backgroundColor = "#DFFFDF";
                             }
                         })
                     }
@@ -269,10 +273,12 @@ const gameBoard = (() => {
                         // @ts-ignore
                         document.querySelector("#player-one-icon").style.color = "black";
                         // @ts-ignore
-                        document.querySelector("#regular-ai-icon").style.color = "yellow";
+                        document.querySelector("#regular-ai-icon").style.color = "#81c5e8";
                         box.textContent = "X";
                         // @ts-ignore
-                        box.style.fontSize = "70px";
+                        box.style.color = "#df5858";
+                        // @ts-ignore
+                        box.style.fontSize = "67px";
                         turns++;
                     };
                     animation();
@@ -296,7 +302,7 @@ const gameBoard = (() => {
                             box.classList.remove("gameboard-box-hover");
                             if(box.textContent === "X" && winnerArray.includes(box.id)) {
                                 // @ts-ignore
-                                box.style.backgroundColor = "pink";
+                                box.style.backgroundColor = "#DFFFDF";
                             }
                         })
                     } else if(turns == 5) {
@@ -312,13 +318,15 @@ const gameBoard = (() => {
 
                         const animation = () => {
                             // @ts-ignore
-                            document.querySelector("#player-one-icon").style.color = "yellow";
+                            document.querySelector("#player-one-icon").style.color = "#df5858";
                             // @ts-ignore
                             document.querySelector("#regular-ai-icon").style.color = "black";
                             // @ts-ignore
                             document.getElementById(`${AIMark}`).textContent = "O";
                             // @ts-ignore
-                            document.getElementById(`${AIMark}`).style.fontSize = "70px";
+                            document.getElementById(`${AIMark}`).style.color = "#81c5e8";
+                            // @ts-ignore
+                            document.getElementById(`${AIMark}`).style.fontSize = "67px";
 
                         };
                         setTimeout(animation, 450);
@@ -337,7 +345,7 @@ const gameBoard = (() => {
                                     box.classList.remove("gameboard-box-hover");
                                     if(box.textContent === "O" && winnerArray.includes(box.id)) {
                                         // @ts-ignore
-                                        box.style.backgroundColor = "pink";
+                                        box.style.backgroundColor = "#DFFFDF";
                                     }
                                 })
                             }

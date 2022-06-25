@@ -178,7 +178,7 @@ const gameBoard = (() => {
                     player1.winCheck();
                     if(player1.win === true && player2.win === false) {
                         // @ts-ignore
-                        document.querySelector("#player-one-icon").style.color = "black";
+                        document.querySelector("#player-one-icon").style.color = "#82EA82";
                         // @ts-ignore
                         document.querySelector("#player-two-icon").style.color = "black";
                         // @ts-ignore
@@ -191,6 +191,10 @@ const gameBoard = (() => {
                             }
                         })
                     } else if(turns == 5) {
+                        // @ts-ignore
+                        document.querySelector("#player-one-icon").style.color = "black";
+                        // @ts-ignore
+                        document.querySelector("#player-two-icon").style.color = "black";
                         // @ts-ignore
                         document.querySelector("#winner-p").textContent = `Draw!`;
                         gameboardBoxes.forEach((box) => {
@@ -219,7 +223,7 @@ const gameBoard = (() => {
                         // @ts-ignore
                         document.querySelector("#player-one-icon").style.color = "black";
                         // @ts-ignore
-                        document.querySelector("#player-two-icon").style.color = "black";
+                        document.querySelector("#player-two-icon").style.color = "#82EA82";
                         // @ts-ignore
                         document.querySelector("#winner-p").textContent = `${player2.name} wins!`;
                         gameboardBoxes.forEach((box) => {
@@ -293,7 +297,7 @@ const gameBoard = (() => {
                     player1.winCheck();
                     if(player1.win === true && regularAI.win === false) {
                         // @ts-ignore
-                        document.querySelector("#player-one-icon").style.color = "black";
+                        document.querySelector("#player-one-icon").style.color = "#82EA82";
                         // @ts-ignore
                         document.querySelector("#regular-ai-icon").style.color = "black";
                         // @ts-ignore
@@ -306,6 +310,10 @@ const gameBoard = (() => {
                             }
                         })
                     } else if(turns == 5) {
+                        // @ts-ignore
+                        document.querySelector("#player-one-icon").style.color = "black";
+                        // @ts-ignore
+                        document.querySelector("#regular-ai-icon").style.color = "black";
                         // @ts-ignore
                         document.querySelector("#winner-p").textContent = `Draw!`;
                         gameboardBoxes.forEach((box) => {
@@ -338,7 +346,7 @@ const gameBoard = (() => {
                                 // @ts-ignore
                                 document.querySelector("#player-one-icon").style.color = "black";
                                 // @ts-ignore
-                                document.querySelector("#regular-ai-icon").style.color = "black";
+                                document.querySelector("#regular-ai-icon").style.color = "#82EA82";
                                 // @ts-ignore
                                 document.querySelector("#winner-p").textContent = `${regularAI.name} wins!`;
                                 gameboardBoxes.forEach((box) => {
